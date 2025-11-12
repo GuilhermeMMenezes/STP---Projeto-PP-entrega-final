@@ -29,29 +29,29 @@ A API é responsável por:
 ├── server.js        # Servidor Express com as rotas da API
 ├── db-config.js     # Configuração de conexão com o MySQL
 └── package.json
-
+``
 <h2>A API utiliza, no mínimo, as tabelas:</h2>
-´´
+``
 create table usuario(
 id int auto_increment unique,
 nomeUsuario varchar(255) not null,
 email varchar(255) unique not null primary key,
 senha varchar(255) not null
 );
-´´
-´´
+``
+``
 create table tarefas(
  id INT AUTO_INCREMENT PRIMARY KEY,
 nomeTarefa varchar(255) not null,
 descricao varchar(255) not null,
  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-´´
+``
 
 <h2>Rotas API</h2<
 
-Post/cadastrar:
-´´
+##Post/cadastrar:
+``
 app.post('/cadastrar', (req, res) => {
     const {nomeUsuario, email ,senha} = req.body
 
@@ -65,10 +65,10 @@ app.post('/cadastrar', (req, res) => {
     })
 
 })
-´´
+``
 
-Post/login:
-´´
+##Post/login:
+``
 app.post('/login', (req, res) => {
   const { email, senha } = req.body;
 
@@ -90,10 +90,10 @@ app.post('/login', (req, res) => {
     }
   });
 });
-´´
+``
 
-post/tarefas:
-´´
+##post/tarefas:
+``
 app.post('/tarefas', (req, res) => {
   const { nomeTarefa, descricao } = req.body;
   if (!nomeTarefa || !descricao) {
@@ -109,9 +109,9 @@ app.post('/tarefas', (req, res) => {
     res.json({ success:true, message:'OK', data:{ id: result.insertId, nomeTarefa, descricao } });
   });
 });
-´´
-get/tarefas:
-´´
+``
+##get/tarefas:
+``
 app.get('/tarefas', (req, res) => {
   const sql = 'SELECT id, nomeTarefa, descricao, created_at FROM tarefas ORDER BY id DESC';
   connection.query(sql, (err, rows) => {
@@ -122,10 +122,10 @@ app.get('/tarefas', (req, res) => {
     res.json({ success:true, data: rows });
   });
 });
-´´
+``
 
-get/perfil/:email:
-´´
+##get/perfil/:email:
+``
 app.get('/perfil/:email', (req, res) => {
   const email = req.params.email;
 
@@ -144,9 +144,9 @@ app.get('/perfil/:email', (req, res) => {
     res.json({ success:true, data: rows[0] });
   });
 });
-´´
+``
 
-delete/usuario:email:
+##delete/usuario:email:
 ``
 app.delete('/usuario/:email', (req, res) => {
   const email = req.params.email;
